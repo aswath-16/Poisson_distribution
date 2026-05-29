@@ -29,10 +29,37 @@ The Poisson distribution is the discrete probability distribution of the number 
 ![image](https://user-images.githubusercontent.com/103921593/230282876-f4a5afbf-cac1-4648-a1b0-c78840638a8e.png)
 
 # Program :
+```
+import numpy as np
+n = int(input("Enter the value of n : "))
+print("Value of n =", n)
+InputVal = {}
+for i in range(1, n+1):
+val = int(input(f"Enter the value no {i} : "))
+try:
+InputVal[val] += 1
+except:
+InputVal[val] = 1
+print(f"{i} Values Collected Successfully")
+mean = 0
+for key, val in InputVal.items():
+mean += key*(val/n)
+print(f"Mean = {mean:.3f}")
+ex2 = 0
+for key, val in InputVal.items():
+ex2 += ((key**2) * val/n)
+var = ex2 - mean**2
+print(f"Variance : {var:.3f}")
+from math import sqrt
+sdtDeviation = sqrt(var)
+print(f"Standard Deviation = {sdtDeviation:.3f}")
+```
 
  
 
-# Output : 
+# Output :
+<img width="385" height="262" alt="{34B2F455-6383-4894-A5B7-7C0D7C60981C}" src="https://github.com/user-attachments/assets/7513a2ef-8094-4282-bf2a-61632a5e97c2" />
+
 
 
 
