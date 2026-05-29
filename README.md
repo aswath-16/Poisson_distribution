@@ -30,35 +30,45 @@ The Poisson distribution is the discrete probability distribution of the number 
 
 # Program :
 ```
-import numpy as np
-n = int(input("Enter the value of n : "))
-print("Value of n =", n)
-InputVal = {}
-for i in range(1, n+1):
-val = int(input(f"Enter the value no {i} : "))
-try:
-InputVal[val] += 1
-except:
-InputVal[val] = 1
-print(f"{i} Values Collected Successfully")
-mean = 0
-for key, val in InputVal.items():
-mean += key*(val/n)
-print(f"Mean = {mean:.3f}")
-ex2 = 0
-for key, val in InputVal.items():
-ex2 += ((key**2) * val/n)
-var = ex2 - mean**2
-print(f"Variance : {var:.3f}")
-from math import sqrt
-sdtDeviation = sqrt(var)
-print(f"Standard Deviation = {sdtDeviation:.3f}")
+ import numpy as np
+import math
+import scipy.stats
+L=[int(i) for i in input().split()]
+N=len(L); M=max(L)
+X=list();f=list()
+for i in range (M+1):
+c = 0
+for j in range(N):
+if L[j]==i:
+c=c+1
+f.append(c)
+X.append(i)
+sf=np.sum(f)
+p=list()
+for i in range(M+1):
+p.append(f[i]/sf)
+mean=np.inner(X,p)
+p=list();E=list();xi=list()
+print("X P(X=x) Obs.Fr Exp.Fr xi")
+print("--------------------------")
+for x in range(M+1):
+p.append(math.exp(-mean)*mean**x/math.factorial(x))
+E.append(p[x]*sf)
+xi.append((f[x]-E[x])**2/E[x])
+print("%2.2f %2.3f %4.2f %3.2f %3.2f"%(x,p[x],f[x],E[x],xi[x]))
+print("--------------------------")
+cal_chi2_sq=np.sum(xi)
+print("Calculated value of Chi square is %4.2f"%cal_chi2_sq)
+table_chi2=scipy.stats.chi2.ppf(1-.01,df=M)
+print("Table value of chi square at 1 level is %4.2f"%table_chi2)
+if cal_chi2_sq<table_chi2:
+print("The given data can be fitted in poisson Distribution at 1% LOS")
+else:
+print("The given data cannot be fitted in Poisson Distribution at 1% LOS")
 ```
 
- 
-
 # Output :
-<img width="385" height="262" alt="{34B2F455-6383-4894-A5B7-7C0D7C60981C}" src="https://github.com/user-attachments/assets/7513a2ef-8094-4282-bf2a-61632a5e97c2" />
+<img width="682" height="427" alt="{2EB42130-4B8E-47CC-B962-51DE8CEEC5F8}" src="https://github.com/user-attachments/assets/31395412-c798-4036-9062-699e8479e001" />
 
 
 
